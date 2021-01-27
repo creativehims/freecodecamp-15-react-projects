@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import people from './data';
 import { FaChevronLeft, FaChevronRight, FaQuoteRight } from 'react-icons/fa';
+
 const Review = () => {
   const [index, setIndex] = useState(0);
   const { name, job, image, text } = people[index];
+
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      nextPerson();
+    }, 5000);
+    return () => clearInterval(timeInterval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index]);
+
   const checkNumber = (number) => {
     if (number > people.length - 1) {
       return 0;
